@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        .floating-symbol {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: popUp 5s ease-in-out infinite;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: translateY(-50vh) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(80vh) scale(1.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createFloatingSymbols() {
+            const body = document.body;
+
+            setInterval(() => {
+                const symbol = document.createElement('div');
+                symbol.textContent = Math.floor(Math.random() * 100) + 1;
+                symbol.className = 'floating-symbol';
+                symbol.style.left = Math.random() * window.innerWidth + 'px';
+                symbol.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                symbol.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                body.appendChild(symbol);
+
+                setTimeout(() => symbol.remove(), 5000);
+            }, 300);
+        }
+
+        createFloatingSymbols();
+    </script>
+</body>
+</html>

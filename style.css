@@ -1,24 +1,36 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: black;
+    background-color: black;
     color: white;
     position: relative;
+    flex-direction: column;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 0;
 }
 
 .game-container {
     z-index: 10;
-    background: rgba(255,255,255,0.02);
+    background: rgba(255,255,255,0.03);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     text-align: center;
+    width: 300px;
+    position: relative;
 }
 
 input, button { 
@@ -31,26 +43,4 @@ button:hover{
     background-color: #000;
     color: #fff;
     border: 2px solid rgb(255, 255, 255);
-}
-
-.floating-symbol {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0.8;
-    animation: popUp 5s ease-in-out infinite;
-}
-
-@keyframes popUp {
-    0% {
-        transform: translateY(-50vh) scale(1);
-        opacity: 0.5;
-    }
-    50% {
-        transform: translateY(50vh) scale(1.5);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0.5;
-    }
 }

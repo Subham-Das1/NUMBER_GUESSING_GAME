@@ -1,72 +1,67 @@
 let randomNumber = Math.floor(Math.random() * 101);
-        let attempts = 0;
-        let score = 100;
-        const maxAttempts = 6;
+let attempts = 0;
+let score = 100;
+const maxAttempts = 6;
 
-        function checkGuess() {
-            let userGuess = Number(document.getElementById('userGuess').value);
-            attempts++;
-            document.getElementById('attemptsLeft').textContent = `Attempts Left: ${maxAttempts - attempts}`;
+function checkGuess() {
+    let userGuess = document.getElementById('userGuess').value;
 
-            if (userGuess === randomNumber) {
-                document.getElementById('message').textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
-                calculateScore();
-                endGame();
-            } else if (userGuess > randomNumber) {
-                document.getElementById('message').textContent = 'The number is lower.';
-            } else {
-                document.getElementById('message').textContent = 'The number is higher.';
-            }
+    if (userGuess === '') {
+        document.getElementById('message').textContent = 'Please enter a number.';
+        return;
+    }
 
-            if (attempts === maxAttempts && userGuess !== randomNumber) {
-                document.getElementById('message').textContent = 'YOU LOST THE GAME!';
-                endGame();
-            }
-        }
+    userGuess = Number(userGuess);
 
-        function calculateScore() {
-            if (attempts === 1) score = 100;
-            else if (attempts === 2) score = 85;
-            else if (attempts === 3) score = 70;
-            else if (attempts === 4) score = 50;
-            else if (attempts === 5) score = 35;
+    if (userGuess > 100 || userGuess < 0) {
+        document.getElementById('message').textContent = 'Please enter a number between 0 and 100.';
+        return;
+    }
 
-            document.getElementById('score').textContent = `Score: ${score}`;
-        }
+    attempts++;
+    document.getElementById('attemptsLeft').textContent = `Attempts Left: ${maxAttempts - attempts}`;
 
-        function endGame() {
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('userGuess').disabled = true;
-            document.getElementById('restartBtn').style.display = 'inline';
-        }
+    if (userGuess === randomNumber) {
+        document.getElementById('message').textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+        calculateScore();
+        endGame();
+    } else if (userGuess > randomNumber) {
+        document.getElementById('message').textContent = 'The number is lower.';
+    } else {
+        document.getElementById('message').textContent = 'The number is higher.';
+    }
 
-        function restartGame() {
-            randomNumber = Math.floor(Math.random() * 101);
-            attempts = 0;
-            score = 100;
-            document.getElementById('message').textContent = '';
-            document.getElementById('score').textContent = '';
-            document.getElementById('attemptsLeft').textContent = `Attempts Left: ${maxAttempts}`;
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('userGuess').disabled = false;
-            document.getElementById('restartBtn').style.display = 'none';
-            document.getElementById('userGuess').value = '';
-        }
+    if (attempts === maxAttempts && userGuess !== randomNumber) {
+        document.getElementById('message').textContent = 'YOU LOST THE GAME!';
+        endGame();
+    }
+}
 
-        function createFloatingSymbols() {
-            const body = document.body;
+function calculateScore() {
+    if (attempts === 1) score = 100;
+    else if (attempts === 2) score = 85;
+    else if (attempts === 3) score = 70;
+    else if (attempts === 4) score = 50;
+    else if (attempts === 5) score = 35;
 
-            setInterval(() => {
-                const symbol = document.createElement('div');
-                symbol.textContent = Math.floor(Math.random() * 100) + 1;
-                symbol.className = 'floating-symbol';
-                symbol.style.left = Math.random() * window.innerWidth + 'px';
-                symbol.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                symbol.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                body.appendChild(symbol);
+    document.getElementById('score').textContent = `Score: ${score}`;
+}
 
-                setTimeout(() => symbol.remove(), 5000);
-            }, 300);
-        }
+function endGame() {
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('userGuess').disabled = true;
+    document.getElementById('restartBtn').style.display = 'inline';
+}
 
-        createFloatingSymbols();
+function restartGame() {
+    randomNumber = Math.floor(Math.random() * 101);
+    attempts = 0;
+    score = 100;
+    document.getElementById('message').textContent = '';
+    document.getElementById('score').textContent = '';
+    document.getElementById('attemptsLeft').textContent = `Attempts Left: ${maxAttempts}`;
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('userGuess').disabled = false;
+    document.getElementById('restartBtn').style.display = 'none';
+    document.getElementById('userGuess').value = '';
+}
